@@ -1,0 +1,6 @@
+. (git)
+repositories:
+  catkin_ws:
+    type: git
+    url: git@github.com:RX-00/bu_dingo_d1.git
+    version: main
