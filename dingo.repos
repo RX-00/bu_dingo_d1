@@ -1,0 +1,53 @@
+repositories:
+    catkin:
+        type: git
+        url: 
+        version: master
+    src/bosu08_custom:
+        type: git
+        url: 
+        version: master
+    src/dingo:
+        type: git
+        url: 
+        version: master
+    src/dingo_manipulation:
+        type: git
+        url: 
+        version: master
+    src/ros_kortex:
+        type: git
+        url: 
+        version: master
+    src/zed-ros-wrapper:
+        type: git
+        url: 
+        version: master
+    src/:
+        type: git
+        url: 
+        version: master
+    src/:
+        type: git
+        url: 
+        version: master
+    src/:
+        type: git
+        url: 
+        version: master
+    src/:
+        type: git
+        url: 
+        version: master
+    src/:
+        type: git
+        url: 
+        version: master
+    src/:
+        type: git
+        url: 
+        version: master
+    src/:
+        type: git
+        url: 
+        version: master

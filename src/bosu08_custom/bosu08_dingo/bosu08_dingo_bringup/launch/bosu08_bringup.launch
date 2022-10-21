@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<launch>
+  <!--
+    bosu08_bringup.launch:
+      - generic launch file that all dingos will use
+      - use environment variables to specificy custom parameters
+  -->
+  <!-- ZED2 PTU -->
+  <group if="$(optenv DINGO_ZED_PTU_DRIVER 0)">
+    <include file="$(find timed_roslaunch)/timed_roslaunch.launch">
+      <arg name="time" value="10" />
+      <arg name="pkg" value="bosu08_dingo_bringup" />
+      <arg name="file" value="zed_ptu.launch" />
+      <arg name="value" value="" />
+      <arg name="node_name" value="timed_zed2_ptu" />
+    </include>
+    <!-- PTU Driver -->
+    <include file="$(find timed_roslaunch)/timed_roslaunch.launch">
+      <arg name="time" value="15" />
+      <arg name="pkg" value="flir_ptu_driver" />
+      <arg name="file" value="ptu.launch" />
+      <arg name="value" value="" />
+      <arg name="node_name" value="timed_flir_ptu" />
+    </include>
+  </group>
+
+  <!-- ZED2 Static -->
+  <group if="$(optenv DINGO_ZED_STATIC_DRIVER 0)">
+    <include file="$(find timed_roslaunch)/timed_roslaunch.launch">
+      <arg name="time" value="15" />
+      <arg name="pkg" value="bosu08_dingo_bringup" />
+      <arg name="file" value="zed_static.launch" />
+      <arg name="value" value="" />
+      <arg name="node_name" value="timed_zed2_static" />
+    </include>
+  </group>
+
+  <!-- Kinova Power On -->
+  <group if="$(optenv DINGO_ARM_POWER 0)">
+    <include file="$(find timed_roslaunch)/timed_roslaunch.launch">
+      <arg name="time" value="20" />
+      <arg name="pkg" value="bosu08_dingo_bringup" />
+      <arg name="file" value="kinova_power_on.launch" />
+      <arg name="value" value="" />
+      <arg name="node_name" value="timed_kinova_power_on" />
+    </include>
+  </group>
+
+  <!-- Kinova Bringup -->
+  <group if="$(optenv DINGO_ARM_DRIVER 0)">
+    <include file="$(find timed_roslaunch)/timed_roslaunch.launch">
+      <arg name="time" value="50" />
+      <arg name="pkg" value="dingo_kinova_bringup" />
+      <arg name="file" value="dingo_gen3_lite_bringup.launch" />
+      <arg name="value" value="" />
+      <arg name="node_name" value="timed_kinova" />
+    </include>
+  </group>
+
+  <!-- Moveit Config -->
+  <group if="$(optenv DINGO_ARM_MOVEIT 0)">
+    <include file="$(find timed_roslaunch)/timed_roslaunch.launch">
+      <arg name="time" value="55" />
+      <arg name="pkg" value="dingo_gen3_lite_moveit_config" />
+      <arg name="file" value="dingo_gen3_lite_moveit_planning_execution.launch" />
+      <arg name="value" value="" />
+      <arg name="node_name" value="timed_moveit" />
+    </include>
+  </group>
+</launch>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Standard Parameters -->
+    <arg name="camera_model"          default="zed2" />       <!-- 'zed' or 'zedm' or 'zed2' -->
+    <arg name="base_frame"            default="base_link" />
+    <arg name="svo_file"              default="" />           <!-- <arg name="svo_file" default="path/to/svo/file.svo"> -->
+    <arg name="stream"                default="" />           <!-- <arg name="stream" default="<ip_address>:<port>"> -->
+    <arg name="camera_id"             default="0" />
+    <arg name="gpu_id"                default="-1" />
+
+    <!-- ZED Static Parameters -->
+    <arg name="zed_static_camera_name"        default="$(optenv DINGO_ZED_STATIC_PREFIX zed2_static)" /> <!-- The name you want -->
+    <arg name="zed_static_node_name"          default="$(optenv DINGO_ZED_STATIC_NODE zed2_static)" />
+    <arg name="zed_static_serial_number"      default="$(optenv DINGO_ZED_STATIC_SERIAL 0)" />
+
+    <node name="$(arg zed_static_node_name)" pkg="zed_wrapper" type="zed_wrapper_node" output="screen" required="true"><!-- launch-prefix="valgrind" -->
+        <rosparam file="$(find zed_wrapper)/params/common.yaml" command="load" />
+        <rosparam file="$(find zed_wrapper)/params/$(arg camera_model).yaml" command="load" />
+
+        <!-- Camera name -->
+        <param name="general/camera_name"               value="$(arg zed_static_camera_name)" />
+
+        <!-- Base frame -->
+        <param name="general/base_frame"                value="$(arg base_frame)" />
+
+        <!-- Serial Number -->
+        <param name="general/serial_number"             value="$(arg zed_static_serial_number)" />
+
+        <!-- SVO file path -->
+        <param name="svo_file"                          value="$(arg svo_file)" />
+
+        <!-- Remote stream -->
+        <param name="stream"                            value="$(arg stream)" />
+
+        <!-- Camera ID -->
+        <param name="general/zed_id"                    value="$(arg camera_id)" />
+
+        <!-- GPU ID -->
+        <param name="general/gpu_id"                    value="$(arg gpu_id)" />
+
+        <!-- Disable TF publishing -->
+        <param name="pos_tracking/publish_tf"            value="false" />
+        <param name="pos_tracking/publish_map_tf"        value="false" />
+    </node>
+</launch>

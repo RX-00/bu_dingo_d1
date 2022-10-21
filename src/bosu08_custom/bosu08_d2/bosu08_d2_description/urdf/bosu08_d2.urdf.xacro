@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- PACS for Bracket on Bracket -->
+  <xacro:include filename="$(find zed_wrapper)/urdf/zed_macro.urdf.xacro"/>
+
+  <xacro:if value="$(optenv DINGO_ZED_PTU_URDF 0)">
+    <!-- PTU -->
+    <xacro:include filename="$(find flir_ptu_description)/urdf/d46.urdf.xacro" />
+    <xacro:ptu_d46 name="ptu" />
+    <joint name="ptu_base_joint" type="fixed">
+      <parent link="E11_mount"/>
+      <child link="ptu_base_link"/>
+      <origin xyz="0.015 0 0"/>
+    </joint>
+
+    <!-- ZED2 PTU -->
+    <xacro:zed_camera name="zed2_ptu" model="zed2" parent="ptu_mount_link">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:zed_camera>
+  </xacro:if>
+
+  <xacro:if value="$(optenv DINGO_ZED_STATIC_URDF 0)">
+    <!-- ZED2 PTU -->
+    <xacro:zed_camera name="zed2_static" model="zed2" parent="C01_mount">
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+    </xacro:zed_camera>
+  </xacro:if>
+
+  <!-- Kinova Arm -->
+  <xacro:if value="$(optenv DINGO_ARM_URDF 0)">
+    <xacro:include filename="$(find dingo_kinova_description)/urdf/dingo_gen3_lite_description.urdf.xacro"/>
+  </xacro:if>
+</robot>
