@@ -4,3 +4,6 @@
 [submodule "src/dingo_manipulation"]
 	path = src/dingo_manipulation
 	url = https://github.com/dingo-cpr/dingo_manipulation
+[submodule "src/ros_kortex"]
+	path = src/ros_kortex
+	url = https://github.com/Kinovarobotics/ros_kortex.git
