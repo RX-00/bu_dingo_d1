@@ -1,3 +1,6 @@
 [submodule "src/dingo"]
 	path = src/dingo
 	url = git@github.com:luis-camero/dingo.git
+[submodule "src/dingo_manipulation"]
+	path = src/dingo_manipulation
+	url = https://github.com/dingo-cpr/dingo_manipulation

@@ -1,10 +1,6 @@
+. (git)
 repositories:
-    catkin:
-        type: git
-        url: git@github.com:RX-00/bu_dingo_d1.git
-        version: main
-    src/dingo:
-        type: git
-        url: https://github.com/luis-camero/dingo
-        version: melodic-devel
-    
+  catkin_ws:
+    type: git
+    url: git@github.com:RX-00/bu_dingo_d1.git
+    version: main
