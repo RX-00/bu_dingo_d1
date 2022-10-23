@@ -6,10 +6,10 @@ It is important to note that the Dingo's run off of a NVIDIA Jetson with a discr
 
 ### Development Computer
 Dependencies that will need to be installed, instructions taken from Clearpath Robotics handy docs (https://www.clearpathrobotics.com/assets/guides/noetic/dingo/Installing.html):
-`wget https://packages.clearpathrobotics.com/public.key -O - | sudo apt-key add -
-sudo sh -c 'echo "deb https://packages.clearpathrobotics.com/stable/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/clearpath-latest.list'
-sudo apt update
-sudo apt install ros-noetic-dingo-desktop ros-noetic-dingo-simulator ros-noetic-dingo-viz`
+`wget https://packages.clearpathrobotics.com/public.key -O - | sudo apt-key add -`
+`sudo sh -c 'echo "deb https://packages.clearpathrobotics.com/stable/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/clearpath-latest.list'`
+`sudo apt update`
+`sudo apt install ros-noetic-dingo-desktop ros-noetic-dingo-simulator ros-noetic-dingo-viz`
 
 Clone this repo (along with all the other repo packages that this one depends on):
 `git clone --recursive git@github.com:RX-00/bu_dingo_d1.git`
@@ -20,10 +20,10 @@ Depending on the C++ compiler on the development computer and the update statuse
 `add_compile_options(-std=c++17)`
 
 Before being able to build all the ROS packages you first need to have CUDA installed. Ideally, this can be done through Ubuntu's apt. These lines are from NVIDIA's developers site CUDA download:
-`wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb
-sudo dpkg -i cuda-keyring_1.0-1_all.deb
-sudo apt-get update
-sudo apt-get -y install cuda`
+`wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb`
+`sudo dpkg -i cuda-keyring_1.0-1_all.deb`
+`sudo apt-get update`
+`sudo apt-get -y install cuda`
 It is important to install CUDA from NVIDIA's latest .deb since the ZED SDK installation offers an outdated version.
 
 Next, you need to install the ZED SDK, which is best done by following Stereolab's instructions at this link: https://www.stereolabs.com/docs/installation/linux/ . Within the terminal while the ZED SDK is being installed you will want to choose yes whenever the installer asks.
