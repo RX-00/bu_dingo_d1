@@ -7,3 +7,6 @@
 [submodule "src/ros_kortex"]
 	path = src/ros_kortex
 	url = https://github.com/Kinovarobotics/ros_kortex.git
+[submodule "src/zed-ros-wrapper"]
+	path = src/zed-ros-wrapper
+	url = https://github.com/stereolabs/zed-ros-wrapper.git
