@@ -1,6 +1,21 @@
-. (git)
 repositories:
   catkin_ws:
     type: git
     url: git@github.com:RX-00/bu_dingo_d1.git
     version: main
+  src/dingo:
+    type: git
+    url: git@github.com:luis-camero/dingo.git
+    version: melodic-devel
+  src/dingo_manipulation:
+    type: git
+    url: https://github.com/dingo-cpr/dingo_manipulation
+    version: main
+  src/ros_kortex:
+    type: git
+    url: https://github.com/Kinovarobotics/ros_kortex.git
+    version: melodic-devel
+  src/zed-ros-wrapper:
+    type: git
+    url: https://github.com/stereolabs/zed-ros-wrapper.git
+    version: master
