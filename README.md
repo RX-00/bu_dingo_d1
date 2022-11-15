@@ -28,7 +28,8 @@ It is important to install CUDA from NVIDIA's latest .deb since the ZED SDK inst
 
 Next, you need to install the ZED SDK, which is best done by following Stereolab's instructions at this link: https://www.stereolabs.com/docs/installation/linux/ . Within the terminal while the ZED SDK is being installed you will want to choose yes whenever the installer asks.
 
-Now you should be able to compile the packages!
+Now you should be able to compile the packages! \
+If there are additional packages issues, try going to the source and cloning the most updated version in relation to your ROS version.
 
 
 ### Dingo Computer

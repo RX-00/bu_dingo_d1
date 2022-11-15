@@ -10,3 +10,6 @@
 [submodule "src/zed-ros-wrapper"]
 	path = src/zed-ros-wrapper
 	url = https://github.com/stereolabs/zed-ros-wrapper.git
+[submodule "src/dingo_simulator"]
+	path = src/dingo_simulator
+	url = https://github.com/dingo-cpr/dingo_simulator
