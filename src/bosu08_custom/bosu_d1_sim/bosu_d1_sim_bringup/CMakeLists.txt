@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(bosu08_d1_bringup)
+project(bosu_d1_sim_bringup)
 
 find_package(catkin REQUIRED)
 

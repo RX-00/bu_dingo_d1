@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>bosu08_d1_bringup</name>
+  <name>bosu_d1_sim_bringup</name>
   <version>0.0.0</version>
   <description>The BOSU08 dingo1 bring up package</description>
-  <maintainer email="lcamero@clearpathrobotics.com">Luis Camero</maintainer>
+  <maintainer email="royx@bu.edu">Roy Xing</maintainer>
   <license>BSD</license>
 
   <!-- Use build_depend for packages you need at compile time: -->
