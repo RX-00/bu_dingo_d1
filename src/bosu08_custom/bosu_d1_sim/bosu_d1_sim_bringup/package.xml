@@ -2,7 +2,7 @@
 <package format="2">
   <name>bosu_d1_sim_bringup</name>
   <version>0.0.0</version>
-  <description>The BOSU08 dingo1 bring up package</description>
+  <description>The BOSU08 dingo1 bring up package for simulation</description>
   <maintainer email="royx@bu.edu">Roy Xing</maintainer>
   <license>BSD</license>
 

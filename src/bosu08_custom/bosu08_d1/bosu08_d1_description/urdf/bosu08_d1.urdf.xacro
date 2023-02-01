@@ -2,7 +2,6 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include filename="$(find zed_wrapper)/urdf/zed_macro.urdf.xacro"/>
   <xacro:if value="$(optenv DINGO_ZED_PTU_URDF 0)">
-
     <!-- PACS for Bracket on Bracket -->
     <xacro:include filename="$(find dingo_description)/urdf/pacs.urdf.xacro"/>
     <link name="ptu"/>
@@ -36,43 +35,7 @@
   </xacro:if>
 
   <!-- Kinova Arm -->
-  <!--xacro:if value="$(optenv DINGO_ARM_URDF 0)"-->
-    <!--xacro:include filename="$(find dingo_kinova_description)/urdf/dingo_gen3_lite_description.urdf.xacro"/-->
-  <!--/xacro:if-->
-
-
-
-  <!-- Gen3 LITE Kinova Arm, Montreal Implementation-->
-
-  <!-- Arguments -->
-  <xacro:arg name="arm" default="gen3_lite" />
-  <!-- Those arguments are ignored for now on Gen3 lite because there is only one supported configuration -->
-  <xacro:arg name="dof" default="6" />
-  <xacro:arg name="vision" default="false" />
-  <xacro:arg name="gripper" default="gen3_lite_2f" />
-  <xacro:arg name="sim" default="false" />
-  <xacro:arg name="prefix" default="" />
-
-  <joint name="arm_mount_joint" type="fixed">
-    <origin xyz="$(optenv DINGO_ARM_XYZ 0.0 0.0 0.0)" rpy="$(optenv DINGO_ARM_RPY 0 0 0)"/>
-    <parent link="$(optenv DINGO_ARM_MOUNT front_b_mount)" />
-    <child link="$(arg prefix)base_link" />
-  </joint>
-
-  <xacro:include filename="$(find dingo_kinova_description)/urdf/kortex_robot_float.xacro" />
-  <xacro:load_robot arm="$(arg arm)" gripper="$(arg gripper)" dof="$(arg dof)" vision="false" sim="$(arg sim)" prefix="$(arg prefix)" />
-
-  <gazebo>
-    <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
-      <alwaysOn>true</alwaysOn>
-      <updateRate>50.0</updateRate>
-      <bodyName>base_link</bodyName>
-      <topicName>ground_truth/state</topicName>
-      <gaussianNoise>0.01</gaussianNoise>
-      <frameName>world</frameName>
-      <xyzOffsets>0 0 0</xyzOffsets>
-      <rpyOffsets>0 0 0</rpyOffsets>
-    </plugin>
-  </gazebo>
-
+  <xacro:if value="$(optenv DINGO_ARM_URDF 0)">
+    <xacro:include filename="$(find dingo_kinova_description)/urdf/dingo_gen3_lite_description.urdf.xacro"/>
+  </xacro:if>
 </robot>

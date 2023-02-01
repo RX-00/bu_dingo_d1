@@ -1,6 +1,6 @@
-# Environment Varibles for BOSU08 Dingo
+# Environment Varibles for dingo simulation variation
 # URDF Extras
-export DINGO_URDF_EXTRAS=$(catkin_find bosu08_d1_description urdf/bosu08_d1.urdf.xacro --first-only)
+export DINGO_URDF_EXTRAS=$(catkin_find bosu_d1_sim_description urdf/bosu_d1_sim.urdf.xacro --first-only)
 
 # Dingo
 export DINGO_OMNI=1
@@ -22,6 +22,14 @@ export DINGO_LASER_3D_HOST="192.168.131.20"
 export DINGO_C11_BRACKET_ENABLED="True"
 export DINGO_C11_BRACKET_TYPE="horizontal"
 export DINGO_C11_BRACKET_EXTENSION="18"
+
+# Realsense
+export DINGO_REALSENSE=0
+export DINGO_REALSENSE_MODEL='d455' # or 'd435i', 'd415', 'd455', 'l515'
+export DINGO_REALSENSE_MOUNT='ptu_mount_link'
+export DINGO_REALSENSE_TOPIC='realsense'
+export DINGO_REALSENSE_OFFSET='0 0 0'
+export DINGO_REALSENSE_RPY='0 0 0'
 
 # PTU Zed
 ## enable
