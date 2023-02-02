@@ -25,7 +25,7 @@ export DINGO_C11_BRACKET_EXTENSION="18"
 
 # Realsense
 export DINGO_REALSENSE=0
-export DINGO_REALSENSE_MODEL='d455' # or 'd435i', 'd415', 'd455', 'l515'
+export DINGO_REALSENSE_MODEL='d435' # or 'd435i', 'd415', 'd455', 'l515'
 export DINGO_REALSENSE_MOUNT='ptu_mount_link'
 export DINGO_REALSENSE_TOPIC='realsense'
 export DINGO_REALSENSE_OFFSET='0 0 0'

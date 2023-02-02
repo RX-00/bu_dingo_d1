@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="dingo_gen3_lite" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include filename="$(find zed_wrapper)/urdf/zed_macro.urdf.xacro"/>
+  
   <xacro:if value="$(optenv DINGO_ZED_PTU_URDF 0)">
     <!-- PACS for Bracket on Bracket -->
     <xacro:include filename="$(find dingo_description)/urdf/pacs.urdf.xacro"/>
@@ -36,6 +37,6 @@
 
   <!-- Kinova Arm -->
   <xacro:if value="$(optenv DINGO_ARM_URDF 0)">
-    <xacro:include filename="$(find dingo_kinova_description)/urdf/dingo_gen3_lite_description.urdf.xacro"/>
+    <xacro:include filename="$(find dingo_kinova_description)/urdf/kortex_robot_float.urdf.xacro"/>
   </xacro:if>
 </robot>

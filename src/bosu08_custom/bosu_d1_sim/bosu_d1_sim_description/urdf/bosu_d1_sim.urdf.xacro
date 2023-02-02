@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <robot name="dingo_gen3_lite" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <!-- PACS for Bracket on Bracket -->
+  <!-- Dingo urdf PACS for Bracket on Bracket -->
   <xacro:include filename="$(find dingo_description)/urdf/pacs.urdf.xacro"/>
-  <link name="ptu"/>
+  
+<link name="ptu"/>
   <joint name="ptu_joint" type="fixed">
     <child link="ptu"/>
     <parent link="C11_mount"/>
@@ -20,7 +21,7 @@
   </joint>
 
   <!-- realsense camera -->
-  <!--
+  <!-- NOTE: CUT OUT IF TESTING GAZEBO FOR LINKAGE REASONS
     Add an Intel RealSense family camera.  By default this is a D435, but can be changed with the
     DINGO_REALSENSE_MODEL environment variable. Valid model designations are:
     - d435 (default)
@@ -33,7 +34,7 @@
   <xacro:include filename="$(find dingo_description)/urdf/accessories/intel_realsense.urdf.xacro" />
   <!-- Primary Realsense Parameters -->
   <xacro:property name="rs_enabled" value="$(optenv DINGO_REALSENSE 1)"/>
-  <xacro:property name="rs_model"   value="$(optenv DINGO_REALSENSE_MODEL d455)"/>
+  <xacro:property name="rs_model"   value="$(optenv DINGO_REALSENSE_MODEL d435)"/>
   <xacro:property name="rs_topic"   value="$(optenv DINGO_REALSENSE_TOPIC realsense)" />
   <xacro:property name="rs_mount"   value="$(optenv DINGO_REALSENSE_MOUNT ptu_mount_link)" />
   <xacro:property name="rs_prefix"  value="$(optenv DINGO_REALSENSE_PREFIX ${rs_mount})" />
@@ -44,12 +45,12 @@
   <xacro:property name="rs_secondary_enabled" value="$(optenv DINGO_REALSENSE_SECONDARY 0)"/>
   <xacro:property name="rs_secondary_model"   value="$(optenv DINGO_REALSENSE_SECONDARY_MODEL d435)"/>
   <xacro:property name="rs_secondary_topic"   value="$(optenv DINGO_REALSENSE_SECONDARY_TOPIC realsense_secondary)" />
-  <xacro:property name="rs_secondary_mount"   value="$(optenv DINGO_REALSENSE_SECONDARY_MOUNT rear)" />
+  <xacro:property name="rs_secondary_mount"   value="$(optenv DINGO_REALSENSE_SECONDARY_MOUNT C01_mount)" />
   <xacro:property name="rs_secondary_prefix"  value="$(optenv DINGO_REALSENSE_SECONDARY_PREFIX ${rs_secondary_mount})" />
   <xacro:property name="rs_secondary_parent"  value="$(optenv DINGO_REALSENSE_SECONDARY_PARENT ${rs_secondary_mount}_mount)" />
   <xacro:property name="rs_secondary_xyz"     value="$(optenv DINGO_REALSENSE_SECONDARY_OFFSET 0 0 0)" />
   <xacro:property name="rs_secondary_rpy"     value="$(optenv DINGO_REALSENSE_SECONDARY_RPY 0 0 ${M_PI})" />
-
+  <!-- PTU realsense camera -->
   <xacro:realsense_sensor rs_model="${rs_model}"
                             prefix="${rs_prefix}"
                             parent="ptu_mount_link"
@@ -57,4 +58,51 @@
                             include="0">
     <origin xyz="${rs_xyz}" rpy="${rs_rpy}"/>
   </xacro:realsense_sensor>
+  <!-- Static realsense camera -->
+  <xacro:realsense_sensor rs_model="${rs_secondary_model}"
+                            prefix="${rs_secondary_prefix}"
+                            parent="C01_mount"
+                            topic="${rs_secondary_topic}"
+                            include="0">
+    <origin xyz="${rs_secondary_xyz}" rpy="${rs_secondary_rpy}"/>
+  </xacro:realsense_sensor>
+
+
+  <!-- Gen3 LITE Kinova Arm -->
+  <xacro:arg name="arm" default="$(optenv DINGO_ARM_MODEL gen3_lite)" />
+  <xacro:arg name="dof" default="$(optenv DINGO_ARM_DOF 6)" />
+  <xacro:arg name="vision" default="$(optenv DINGO_ARM_VISION true)" />
+  <xacro:arg name="gripper" default="$(optenv DINGO_ARM_GRIPPER gen3_lite_2f)" />
+  <xacro:arg name="sim" default="$(optenv DINGO_ARM_SIM false)" />
+  <xacro:arg name="prefix" default="$(optenv DINGO_ARM_PREFIX arm)_" />
+
+  <joint name="arm_mount_joint" type="fixed">
+    <origin xyz="$(optenv DINGO_ARM_XYZ 0.0 0.0 0.0)" rpy="$(optenv DINGO_ARM_RPY 0 0 0)"/>
+    <parent link="$(optenv DINGO_ARM_MOUNT front_b_mount)" />
+    <child link="$(arg prefix)base_link" />
+  </joint>
+
+
+  <xacro:include filename="$(find dingo_kinova_description)/urdf/kortex_robot_float.urdf.xacro" />
+  <!-- Load the arm -->
+  <xacro:load_robot arm="$(arg arm)" gripper="$(arg gripper)" dof="$(arg dof)" vision="false" sim="$(arg sim)" prefix="$(arg prefix)" />
+
+
+  <gazebo>
+    <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>50.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>ground_truth/state</topicName>
+      <gaussianNoise>0.01</gaussianNoise>
+      <frameName>world</frameName>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
+    </plugin>
+  </gazebo>
+
+
+
+  
+
 </robot>
